@@ -1,5 +1,4 @@
 pipeline {
-
     agent {
         node {
             label 'master'
@@ -8,13 +7,12 @@ pipeline {
 
     options {
         buildDiscarder logRotator( 
-                    daysToKeepStr: '16', 
-                    numToKeepStr: '10'
-            )
+            daysToKeepStr: '16', 
+            numToKeepStr: '10'
+        )
     }
 
     stages {
-        
         stage('Cleanup Workspace') {
             steps {
                 cleanWs()
@@ -23,7 +21,8 @@ pipeline {
                 """
             }
         }
-stage(' Unit Testing') {
+
+        stage('Unit Testing') {
             steps {
                 sh """
                 echo "Running Unit Tests"
@@ -42,6 +41,11 @@ stage(' Unit Testing') {
         stage('Build Deploy Code') {
             when {
                 branch 'develop'
+            }
+            steps {
+                sh """
+                echo "Building and Deploying Code"
+                """
             }
         }
     }
