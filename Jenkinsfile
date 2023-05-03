@@ -1,13 +1,9 @@
 pipeline {
-    agent {
-        node {
-            label 'master'
-        }
-    }
+    agent any
 
     options {
-        buildDiscarder logRotator( 
-            daysToKeepStr: '16', 
+        buildDiscarder logRotator(
+            daysToKeepStr: '16',
             numToKeepStr: '10'
         )
     }
@@ -38,7 +34,7 @@ pipeline {
             }
         }
 
-        stage('Build Deploy Code') {
+        stage('Build and Deploy Code') {
             when {
                 branch 'develop'
             }
