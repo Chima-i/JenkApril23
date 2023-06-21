@@ -1,1 +1,1 @@
-entki
+entkimain
